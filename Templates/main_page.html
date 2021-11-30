@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block body %} 
+
+<div class="container m-5">
+    <div class="row">
+    <div class="col-4">
+        <form action="" method="post">
+          {% csrf_token %}
+            <div class="mb-3">
+              <label for="reg" class="form-label">Reg_number</label>
+              <input type="text" value="{{st.reg_num}}" class="form-control" name="reg_num" id="reg">
+            </div>
+            <div class="mb-3">
+                <label for="nam" class="form-label">Name</label>
+                <input type="text" value="{{st.name}}"  class="form-control" name="name" id="nam">
+              </div>            
+              <div class="mb-3">
+                <label for="disabledSelect" class="form-label">Select Degree</label>
+                <select id="disabledSelect" name="degree" class="form-select">
+                  <option>BS-CS</option>
+                  <option>BS-Civil</option>
+                </select>
+              </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+    <div class="col-8">
+      
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Reg Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Degree</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+               {% for i in object %}
+              <tr>
+                <td>{{i.reg_num}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.degree}}</td>
+                <td><a style="text-decoration: none;" href="/edit/{{ i.reg_num }}">Edit || </a><a style="color: red;text-decoration: none;"href="/dele/{{ i.reg_num }}">Delete</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+</div>
+
+{% endblock body %}
